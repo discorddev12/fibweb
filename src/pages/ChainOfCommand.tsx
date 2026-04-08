@@ -6,24 +6,24 @@ const ranks = [
     tier: "Executive Leadership",
     icon: Star,
     members: [
-      { rank: "Director", name: "TBD", role: "Oversees all FIB operations and reports to federal leadership." },
-      { rank: "Deputy Director", name: "TBD", role: "Second in command, manages day-to-day Bureau operations." },
+      { rank: "Director", name: "1S-01 A.Aaron", role: "Oversees all FIB operations and reports to federal leadership." },
+      { rank: "Deputy Director", name: "1S-02 Seb", role: "Second in command, manages day-to-day Bureau operations." },
+      { rank: "Assistant Deputy Director", name: "1S-03 M.JJ", role: "Assists the Deputy Director and oversees divisional coordination." },
     ],
   },
   {
     tier: "Senior Command",
     icon: Award,
     members: [
-      { rank: "Assistant Director", name: "TBD", role: "Leads specific branches and divisions within the Bureau." },
-      { rank: "Special Agent in Charge (SAC)", name: "TBD", role: "Commands field offices and major operation centers." },
+      { rank: "Special Agent in Charge (SAC)", name: "Open Positions", role: "Commands field offices and major operation centers." },
     ],
   },
   {
     tier: "Field Leadership",
     icon: Shield,
     members: [
-      { rank: "Supervisory Special Agent", name: "TBD", role: "Supervises field teams and active investigations." },
-      { rank: "Senior Special Agent", name: "TBD", role: "Experienced agent leading critical operations." },
+      { rank: "Supervisory Special Agent", name: "Open Positions", role: "Supervises field teams and active investigations." },
+      { rank: "Senior Special Agent", name: "Open Positions", role: "Experienced agent leading critical operations." },
     ],
   },
   {
