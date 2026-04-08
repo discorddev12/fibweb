@@ -1,11 +1,11 @@
-import { Shield, Crosshair, Search, FileText } from "lucide-react";
+import { Shield, Crosshair, Search, Zap } from "lucide-react";
 import Layout from "@/components/Layout";
 
 const divisions = [
-  { icon: Shield, name: "Criminal Investigations Division", desc: "Handles major criminal cases, organized crime, and high-profile investigations across Paradise State." },
-  { icon: Crosshair, name: "Special Operations Unit", desc: "Elite tactical team handling high-risk warrants, hostage situations, and counter-terrorism operations." },
-  { icon: Search, name: "Intelligence & Surveillance", desc: "Gathering and analyzing intelligence to preemptively identify and neutralize threats." },
-  { icon: FileText, name: "Internal Affairs", desc: "Ensuring the highest standards of conduct within the Bureau and investigating misconduct." },
+  { icon: Search, name: "Criminal Investigation Division", desc: "Handles major criminal cases, organized crime, and high-profile investigations across Paradise State." },
+  { icon: Shield, name: "Gang Task Force", desc: "Specialized unit dedicated to dismantling gang operations, tracking gang activity, and reducing organized street crime." },
+  { icon: Zap, name: "H.E.A.T (High-Speed Enforcement & Apprehension Team)", desc: "High-speed pursuit unit specializing in vehicle interdiction, tactical driving, and rapid response operations." },
+  { icon: Crosshair, name: "CRU (Crisis Response Unit)", desc: "The Bureau's elite SWAT team handling high-risk warrants, hostage situations, barricaded suspects, and counter-terrorism operations." },
 ];
 
 export default function About() {
