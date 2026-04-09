@@ -1,6 +1,16 @@
 import { Camera, Video, Newspaper } from "lucide-react";
 import Layout from "@/components/Layout";
-import heroBanner from "@/assets/hero-banner.jpg";
+import media1 from "@/assets/media-1.png";
+import media2 from "@/assets/media-2.png";
+import media3 from "@/assets/media-3.png";
+import media4 from "@/assets/media-4.png";
+
+const galleryImages = [
+  { src: media1, alt: "FIB patrol unit on desert highway at dusk" },
+  { src: media2, alt: "FIB high-speed pursuit in action" },
+  { src: media3, alt: "FIB CRU tactical operator geared up" },
+  { src: media4, alt: "FIB Director's vehicle on scenic route" },
+];
 
 const newsItems = [
   { date: "2026-04-05", title: "FIB Successfully Dismantles Major Drug Ring", excerpt: "In a coordinated operation, FIB agents arrested 12 suspects linked to a large-scale narcotics trafficking network." },
@@ -28,12 +38,12 @@ export default function Media() {
             <Camera className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold text-foreground font-serif">Gallery</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="aspect-video rounded-lg overflow-hidden border border-gold glow-gold">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {galleryImages.map((img) => (
+              <div key={img.alt} className="aspect-video rounded-lg overflow-hidden border border-gold glow-gold">
                 <img
-                  src={heroBanner}
-                  alt={`FIB Operations ${i}`}
+                  src={img.src}
+                  alt={img.alt}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
