@@ -71,7 +71,7 @@ export default function Join() {
               Applications are handled through our PSRP Discord server. Click below to join and find the FIB application channel.
             </p>
             <a
-              href="https://discord.gg/"
+              href="https://discord.gg/b2tzYpZxuy"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-bold tracking-wider text-primary-foreground transition-all hover:opacity-90 glow-gold"
