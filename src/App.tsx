@@ -8,6 +8,7 @@ import About from "./pages/About";
 import ChainOfCommand from "./pages/ChainOfCommand";
 import Media from "./pages/Media";
 import Join from "./pages/Join";
+import Database from "./pages/Database";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/chain-of-command" element={<ChainOfCommand />} />
           <Route path="/media" element={<Media />} />
           <Route path="/join" element={<Join />} />
+          <Route path="/database" element={<Database />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
