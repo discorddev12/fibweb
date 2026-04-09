@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 
 const requirements = [
   "Must be an active member of Paradise State Roleplay (PSRP)",
-  "Minimum age of 16 years old",
+  "Minimum age of 14 years old (must demonstrate maturity)",
   "Clean disciplinary record within PSRP",
   "Ability to follow chain of command and standard operating procedures",
   "Willingness to undergo FIB Academy training",
