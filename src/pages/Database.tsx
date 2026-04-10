@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
-import { Search, FileWarning, ShieldAlert, Lock, Eye, EyeOff, AlertTriangle } from "lucide-react";
+import { Search, FileWarning, ShieldAlert, Lock, Eye, EyeOff, AlertTriangle, Trash2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import StatusBadge from "@/components/database/StatusBadge";
 import CreateCaseForm from "@/components/database/CreateCaseForm";
+import SearchWarrantForm from "@/components/database/SearchWarrantForm";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface CaseRecord {
   id: string;
