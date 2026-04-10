@@ -39,6 +39,7 @@ export default function Database() {
   const [accessGranted, setAccessGranted] = useState(false);
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
+  const [loginAttempt, setLoginAttempt] = useState<"idle" | "success" | "denied">("idle");
   const [dbCases, setDbCases] = useState<CaseRecord[]>([]);
 
   const fetchCases = useCallback(async () => {
