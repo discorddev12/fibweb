@@ -1,0 +1,1 @@
+CREATE POLICY "Allow public delete on cases" ON public.cases FOR DELETE USING (true);

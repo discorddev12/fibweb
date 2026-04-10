@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
-import { Search, FileWarning, ShieldAlert, Lock, Eye, EyeOff, AlertTriangle } from "lucide-react";
+import { Search, FileWarning, ShieldAlert, Lock, Eye, EyeOff, AlertTriangle, Trash2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import StatusBadge from "@/components/database/StatusBadge";
 import CreateCaseForm from "@/components/database/CreateCaseForm";
+import SearchWarrantForm from "@/components/database/SearchWarrantForm";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface CaseRecord {
   id: string;
@@ -53,14 +55,26 @@ export default function Database() {
 
   // Combine fake + real cases for search
   const allSubjects = [
-    ...fakeSubjects.map((s) => ({ name: s.name, status: s.status, threat: s.threat, lastSeen: s.lastSeen, charges: s.charges, notes: s.notes || "", caseFile: s.caseFile })),
-    ...dbCases.map((c) => ({ name: c.name, status: c.status, threat: c.threat, lastSeen: c.last_seen || "Unknown", charges: c.charges || [], notes: c.notes || "", caseFile: c.case_file })),
+    ...fakeSubjects.map((s) => ({ id: null as string | null, name: s.name, status: s.status, threat: s.threat, lastSeen: s.lastSeen, charges: s.charges, notes: s.notes || "", caseFile: s.caseFile })),
+    ...dbCases.map((c) => ({ id: c.id, name: c.name, status: c.status, threat: c.threat, lastSeen: c.last_seen || "Unknown", charges: c.charges || [], notes: c.notes || "", caseFile: c.case_file })),
   ];
 
   const filteredSubjects = allSubjects.filter((s) =>
     s.name.toLowerCase().includes(query.toLowerCase()) ||
     s.caseFile.toLowerCase().includes(query.toLowerCase())
   );
+
+  const recentCases = dbCases.slice(0, 5);
+
+  const handleDeleteCase = async (id: string) => {
+    const { error } = await supabase.from("cases").delete().eq("id", id);
+    if (error) {
+      toast.error("Failed to delete case file.");
+    } else {
+      toast.success("Case file purged from database.");
+      fetchCases();
+    }
+  };
 
   const handleLogin = () => {
     if (password === "fibot") {
@@ -155,12 +169,58 @@ export default function Database() {
         </div>
       </section>
 
-      {/* Create Case */}
+      {/* Actions */}
       <section className="py-6 px-4">
-        <div className="container mx-auto max-w-3xl">
+        <div className="container mx-auto max-w-3xl flex flex-wrap gap-3">
           <CreateCaseForm onCreated={fetchCases} />
+          <SearchWarrantForm />
         </div>
       </section>
+
+      {/* Recent Cases */}
+      {!searched && recentCases.length > 0 && (
+        <section className="pb-6 px-4">
+          <div className="container mx-auto max-w-3xl space-y-3">
+            <p className="text-muted-foreground text-xs font-mono tracking-wider">RECENT CASE FILES — {recentCases.length} RECORD(S)</p>
+            {recentCases.map((c) => (
+              <div key={c.id} className="bg-gradient-card border border-gold rounded-lg p-5 space-y-3">
+                <div className="flex items-start justify-between gap-3 flex-wrap">
+                  <div>
+                    <h3 className="text-foreground font-bold font-mono">{c.name}</h3>
+                    <p className="text-muted-foreground text-xs font-mono">Case: {c.case_file}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <StatusBadge status={c.status} />
+                    <span className="text-[10px] font-bold tracking-wider text-muted-foreground border border-border rounded px-1.5 py-0.5">THREAT: {c.threat}</span>
+                    <button onClick={() => handleDeleteCase(c.id)} className="text-destructive/60 hover:text-destructive transition-colors" title="Delete case">
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+                <div className="text-xs text-muted-foreground font-mono">
+                  <span className="text-foreground/60">Last Known Location:</span> {c.last_seen || "Unknown"}
+                </div>
+                {c.charges && c.charges.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {c.charges.map((ch, j) => (
+                      <span key={j} className="bg-background border border-border rounded px-2 py-0.5 text-[10px] text-foreground/70 font-mono">{ch}</span>
+                    ))}
+                  </div>
+                )}
+                {c.notes && (
+                  <div className="bg-background/50 border border-border rounded p-3">
+                    <div className="flex items-center gap-1.5 mb-1.5">
+                      <Eye className="h-3 w-3 text-muted-foreground" />
+                      <span className="text-[10px] font-bold text-muted-foreground tracking-wider">INTEL NOTES</span>
+                    </div>
+                    <p className="text-xs text-foreground/60 font-mono leading-relaxed">{c.notes}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Search */}
       <section className="py-4 px-4">
@@ -190,6 +250,11 @@ export default function Database() {
                   <div className="flex items-center gap-2">
                     <StatusBadge status={subject.status} />
                     <span className="text-[10px] font-bold tracking-wider text-muted-foreground border border-border rounded px-1.5 py-0.5">THREAT: {subject.threat}</span>
+                    {subject.id && (
+                      <button onClick={() => handleDeleteCase(subject.id!)} className="text-destructive/60 hover:text-destructive transition-colors" title="Delete case">
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="text-xs text-muted-foreground font-mono">
