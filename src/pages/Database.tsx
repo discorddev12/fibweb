@@ -250,6 +250,11 @@ export default function Database() {
                   <div className="flex items-center gap-2">
                     <StatusBadge status={subject.status} />
                     <span className="text-[10px] font-bold tracking-wider text-muted-foreground border border-border rounded px-1.5 py-0.5">THREAT: {subject.threat}</span>
+                    {subject.id && (
+                      <button onClick={() => handleDeleteCase(subject.id!)} className="text-destructive/60 hover:text-destructive transition-colors" title="Delete case">
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="text-xs text-muted-foreground font-mono">
