@@ -39,6 +39,7 @@ export default function Database() {
   const [accessGranted, setAccessGranted] = useState(false);
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
+  const [loginAttempt, setLoginAttempt] = useState<"idle" | "success" | "denied">("idle");
   const [dbCases, setDbCases] = useState<CaseRecord[]>([]);
 
   const fetchCases = useCallback(async () => {
@@ -62,13 +63,53 @@ export default function Database() {
   );
 
   const handleLogin = () => {
-    if (password.length >= 1) setAccessGranted(true);
-    else setLoginError(true);
+    if (password === "fibot") {
+      setLoginError(false);
+      setLoginAttempt("success");
+      setTimeout(() => setAccessGranted(true), 2000);
+    } else {
+      setLoginAttempt("denied");
+      setLoginError(true);
+      setTimeout(() => setLoginAttempt("idle"), 2500);
+    }
   };
 
   if (!accessGranted) {
     return (
       <Layout>
+        {/* Fullscreen overlay animations */}
+        {loginAttempt === "success" && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 animate-fade-in">
+            <div className="text-center space-y-4 animate-scale-in">
+              <div className="relative mx-auto w-24 h-24">
+                <div className="absolute inset-0 rounded-full border-4 border-green-500 animate-ping opacity-30" />
+                <div className="absolute inset-0 rounded-full border-2 border-green-500 animate-pulse" />
+                <ShieldAlert className="h-24 w-24 text-green-500 relative z-10" />
+              </div>
+              <h2 className="text-3xl font-bold text-green-400 font-mono tracking-[0.4em] animate-pulse">ACCESS GRANTED</h2>
+              <p className="text-green-500/60 text-xs font-mono tracking-widest">WELCOME, AGENT — LOADING SECURE DATABASE...</p>
+              <div className="w-48 mx-auto h-1 bg-muted rounded-full overflow-hidden mt-4">
+                <div className="h-full bg-green-500 rounded-full animate-[loading_1.5s_ease-in-out_forwards]" />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {loginAttempt === "denied" && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 animate-fade-in">
+            <div className="text-center space-y-4 animate-scale-in">
+              <div className="relative mx-auto w-24 h-24">
+                <div className="absolute inset-0 rounded-full border-4 border-destructive animate-ping opacity-30" />
+                <div className="absolute inset-0 rounded-full border-2 border-destructive animate-pulse" />
+                <Lock className="h-24 w-24 text-destructive relative z-10" />
+              </div>
+              <h2 className="text-3xl font-bold text-destructive font-mono tracking-[0.4em] animate-pulse">ACCESS DENIED</h2>
+              <p className="text-destructive/60 text-xs font-mono tracking-widest">INVALID CREDENTIALS — THIS ATTEMPT HAS BEEN LOGGED</p>
+              <p className="text-destructive/40 text-[10px] font-mono">INCIDENT REPORTED TO FIB INTERNAL SECURITY DIVISION</p>
+            </div>
+          </div>
+        )}
+
         <section className="min-h-[80vh] flex items-center justify-center px-4">
           <div className="w-full max-w-md">
             <div className="bg-gradient-card border border-gold rounded-lg p-8 text-center space-y-6">
@@ -81,11 +122,11 @@ export default function Database() {
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input type="password" placeholder="Enter access code..." value={password}
-                    onChange={(e) => { setPassword(e.target.value); setLoginError(false); }}
+                    onChange={(e) => { setPassword(e.target.value); setLoginError(false); setLoginAttempt("idle"); }}
                     onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-                    className="w-full bg-background border border-border rounded-md py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary" />
+                    className="w-full bg-background border border-border rounded-md py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary font-mono" />
                 </div>
-                {loginError && <p className="text-red-400 text-xs">Access code required.</p>}
+                {loginError && loginAttempt === "idle" && <p className="text-destructive text-xs font-mono">⚠ INCORRECT ACCESS CODE</p>}
                 <button onClick={handleLogin} className="w-full bg-primary text-primary-foreground py-2.5 rounded-md text-sm font-bold tracking-wider hover:opacity-90 transition-opacity">
                   ACCESS DATABASE
                 </button>
