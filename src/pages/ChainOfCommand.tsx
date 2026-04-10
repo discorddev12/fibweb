@@ -17,7 +17,7 @@ const ranks = [
     tier: "Special Coordinators",
     icon: Award,
     members: [
-      { rank: "2S-06 → 2S-11 — Special Coordinator", name: "Multiple Holders", role: "The Special Coordinators is a big step, they are tasked with helping with our daily and weekly task from posting Song of the Day to our weekly promotions. They are the Department Heads right hand when getting our tasks completed." },
+      { rank: "2S-06 → 2S-11 — Special Coordinator", name: "K.Krispy, J. Davis, O. Dory", role: "The Special Coordinators is a big step, they are tasked with helping with our daily and weekly task from posting Song of the Day to our weekly promotions. They are the Department Heads right hand when getting our tasks completed." },
     ],
   },
   {
