@@ -55,14 +55,26 @@ export default function Database() {
 
   // Combine fake + real cases for search
   const allSubjects = [
-    ...fakeSubjects.map((s) => ({ name: s.name, status: s.status, threat: s.threat, lastSeen: s.lastSeen, charges: s.charges, notes: s.notes || "", caseFile: s.caseFile })),
-    ...dbCases.map((c) => ({ name: c.name, status: c.status, threat: c.threat, lastSeen: c.last_seen || "Unknown", charges: c.charges || [], notes: c.notes || "", caseFile: c.case_file })),
+    ...fakeSubjects.map((s) => ({ id: null as string | null, name: s.name, status: s.status, threat: s.threat, lastSeen: s.lastSeen, charges: s.charges, notes: s.notes || "", caseFile: s.caseFile })),
+    ...dbCases.map((c) => ({ id: c.id, name: c.name, status: c.status, threat: c.threat, lastSeen: c.last_seen || "Unknown", charges: c.charges || [], notes: c.notes || "", caseFile: c.case_file })),
   ];
 
   const filteredSubjects = allSubjects.filter((s) =>
     s.name.toLowerCase().includes(query.toLowerCase()) ||
     s.caseFile.toLowerCase().includes(query.toLowerCase())
   );
+
+  const recentCases = dbCases.slice(0, 5);
+
+  const handleDeleteCase = async (id: string) => {
+    const { error } = await supabase.from("cases").delete().eq("id", id);
+    if (error) {
+      toast.error("Failed to delete case file.");
+    } else {
+      toast.success("Case file purged from database.");
+      fetchCases();
+    }
+  };
 
   const handleLogin = () => {
     if (password === "fibot") {
