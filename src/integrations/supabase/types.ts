@@ -14,48 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      agents: {
-        Row: {
-          avatar_url: string | null
-          badge_number: string
-          callsign: string | null
-          clearance_level: string | null
-          created_at: string
-          discord_id: string
-          division: string | null
-          id: string
-          rank: string
-          updated_at: string
-          username: string
-        }
-        Insert: {
-          avatar_url?: string | null
-          badge_number: string
-          callsign?: string | null
-          clearance_level?: string | null
-          created_at?: string
-          discord_id: string
-          division?: string | null
-          id?: string
-          rank?: string
-          updated_at?: string
-          username: string
-        }
-        Update: {
-          avatar_url?: string | null
-          badge_number?: string
-          callsign?: string | null
-          clearance_level?: string | null
-          created_at?: string
-          discord_id?: string
-          division?: string | null
-          id?: string
-          rank?: string
-          updated_at?: string
-          username?: string
-        }
-        Relationships: []
-      }
       cases: {
         Row: {
           case_file: string

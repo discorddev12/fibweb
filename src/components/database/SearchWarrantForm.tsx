@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FileText, X, CheckCircle, Stamp } from "lucide-react";
 
-export default function SearchWarrantForm({ agent }: { agent?: { rank?: string; badge_number?: string; username?: string } | null }) {
+export default function SearchWarrantForm() {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
     subjectName: "",
@@ -68,7 +68,7 @@ export default function SearchWarrantForm({ agent }: { agent?: { rank?: string; 
             <p className="text-xs text-foreground/80 font-mono leading-relaxed">
               The Federal Investigation Bureau, acting under the authority of the Paradise State Judiciary,
               hereby authorizes a <span className="text-primary font-bold">SEARCH AND SEIZURE</span> operation
-              pertaining to the following. {agent ? `Requested by ${agent.rank || ""} ${agent.username || ""}, Badge #${agent.badge_number || "N/A"}.` : ""}
+              pertaining to the following:
             </p>
 
             <div className="space-y-2">
