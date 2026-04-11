@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
-import { Search, FileWarning, ShieldAlert, Lock, Eye, EyeOff, AlertTriangle, Trash2 } from "lucide-react";
+import { Search, FileWarning, ShieldAlert, Lock, Eye, EyeOff, AlertTriangle, Trash2, User } from "lucide-react";
 import Layout from "@/components/Layout";
 import StatusBadge from "@/components/database/StatusBadge";
 import CreateCaseForm from "@/components/database/CreateCaseForm";
 import SearchWarrantForm from "@/components/database/SearchWarrantForm";
+import AgentIDCard from "@/components/database/AgentIDCard";
+import { useAgent } from "@/hooks/use-agent";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -43,6 +45,10 @@ export default function Database() {
   const [loginError, setLoginError] = useState(false);
   const [loginAttempt, setLoginAttempt] = useState<"idle" | "success" | "denied">("idle");
   const [dbCases, setDbCases] = useState<CaseRecord[]>([]);
+  const [welcomeMsg, setWelcomeMsg] = useState<string>("");
+  const [discordIdInput, setDiscordIdInput] = useState("");
+
+  const { agent, loginWithDiscordId, logout } = useAgent();
 
   const fetchCases = useCallback(async () => {
     const { data } = await supabase.from("cases").select("*").order("created_at", { ascending: false });
@@ -53,7 +59,17 @@ export default function Database() {
     if (accessGranted) fetchCases();
   }, [accessGranted, fetchCases]);
 
-  // Combine fake + real cases for search
+  // Generate AI welcome when agent is loaded
+  useEffect(() => {
+    if (agent && accessGranted && !welcomeMsg) {
+      supabase.functions.invoke("fib-ai", {
+        body: { type: "welcome", agent },
+      }).then(({ data }) => {
+        if (data?.content) setWelcomeMsg(data.content);
+      }).catch(() => {});
+    }
+  }, [agent, accessGranted, welcomeMsg]);
+
   const allSubjects = [
     ...fakeSubjects.map((s) => ({ id: null as string | null, name: s.name, status: s.status, threat: s.threat, lastSeen: s.lastSeen, charges: s.charges, notes: s.notes || "", caseFile: s.caseFile })),
     ...dbCases.map((c) => ({ id: c.id, name: c.name, status: c.status, threat: c.threat, lastSeen: c.last_seen || "Unknown", charges: c.charges || [], notes: c.notes || "", caseFile: c.case_file })),
@@ -76,10 +92,14 @@ export default function Database() {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (password === "fibot") {
       setLoginError(false);
       setLoginAttempt("success");
+      // Try to load agent profile if discord ID was provided
+      if (discordIdInput.trim()) {
+        await loginWithDiscordId(discordIdInput.trim());
+      }
       setTimeout(() => setAccessGranted(true), 2000);
     } else {
       setLoginAttempt("denied");
@@ -91,7 +111,6 @@ export default function Database() {
   if (!accessGranted) {
     return (
       <Layout>
-        {/* Fullscreen overlay animations */}
         {loginAttempt === "success" && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 animate-fade-in">
             <div className="text-center space-y-4 animate-scale-in">
@@ -134,6 +153,13 @@ export default function Database() {
               </div>
               <div className="space-y-3">
                 <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <input type="text" placeholder="Discord ID (optional — for agent profile)"
+                    value={discordIdInput}
+                    onChange={(e) => setDiscordIdInput(e.target.value)}
+                    className="w-full bg-background border border-border rounded-md py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary font-mono" />
+                </div>
+                <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input type="password" placeholder="Enter access code..." value={password}
                     onChange={(e) => { setPassword(e.target.value); setLoginError(false); setLoginAttempt("idle"); }}
@@ -164,16 +190,32 @@ export default function Database() {
           <p className="text-center text-muted-foreground text-xs tracking-[0.3em]">CLASSIFIED — FOR OFFICIAL USE ONLY — PARADISE STATE JURISDICTION</p>
           <div className="flex items-center justify-center gap-2 mt-4">
             <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-green-400 text-xs font-mono">SYSTEM ONLINE — CLEARANCE LEVEL: AGENT</span>
+            <span className="text-green-400 text-xs font-mono">
+              SYSTEM ONLINE — CLEARANCE LEVEL: {agent ? agent.clearance_level : "AGENT"}
+            </span>
           </div>
         </div>
       </section>
 
+      {/* Agent ID Card */}
+      {agent && (
+        <section className="py-6 px-4">
+          <div className="container mx-auto max-w-3xl">
+            <AgentIDCard agent={agent} welcomeMessage={welcomeMsg || undefined} />
+          </div>
+        </section>
+      )}
+
       {/* Actions */}
       <section className="py-6 px-4">
         <div className="container mx-auto max-w-3xl flex flex-wrap gap-3">
-          <CreateCaseForm onCreated={fetchCases} />
-          <SearchWarrantForm />
+          <CreateCaseForm onCreated={fetchCases} agent={agent} />
+          <SearchWarrantForm agent={agent} />
+          {agent && (
+            <button onClick={logout} className="flex items-center gap-2 bg-destructive/20 text-destructive px-4 py-2 rounded-md text-sm font-bold tracking-wider hover:bg-destructive/30 transition-colors border border-destructive/30">
+              LOGOUT AGENT
+            </button>
+          )}
         </div>
       </section>
 
