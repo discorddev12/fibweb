@@ -6,7 +6,7 @@ import { toast } from "sonner";
 const STATUS_OPTIONS = ["WANTED", "UNDER SURVEILLANCE", "IN CUSTODY", "CLASSIFIED"];
 const THREAT_OPTIONS = ["LOW", "MEDIUM", "HIGH", "██████"];
 
-export default function CreateCaseForm({ onCreated }: { onCreated: () => void }) {
+export default function CreateCaseForm({ onCreated, agent }: { onCreated: () => void; agent?: { rank?: string; badge_number?: string; username?: string } | null }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -30,7 +30,7 @@ export default function CreateCaseForm({ onCreated }: { onCreated: () => void })
       threat: form.threat,
       last_seen: form.last_seen || null,
       charges: form.charges.split(",").map((c) => c.trim()).filter(Boolean),
-      notes: form.notes || null,
+      notes: agent ? `Filed by ${agent.rank || ""} ${agent.username || ""}, Badge #${agent.badge_number || "N/A"}. ${form.notes || ""}`.trim() : (form.notes || null),
     });
     setLoading(false);
     if (error) {
