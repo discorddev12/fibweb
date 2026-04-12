@@ -4,6 +4,8 @@ import Layout from "@/components/Layout";
 import StatusBadge from "@/components/database/StatusBadge";
 import CreateCaseForm from "@/components/database/CreateCaseForm";
 import SearchWarrantForm from "@/components/database/SearchWarrantForm";
+import SatLinkRadar from "@/components/database/SatLinkRadar";
+import ConsoleLog from "@/components/database/ConsoleLog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -155,6 +157,7 @@ export default function Database() {
 
   return (
     <Layout>
+      {/* Sat-Link + Header */}
       <section className="py-20 px-4 border-b border-gold">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -168,6 +171,19 @@ export default function Database() {
           </div>
         </div>
       </section>
+
+      {/* Main layout with console sidebars */}
+      <div className="container mx-auto max-w-[1400px] px-4">
+        <div className="flex gap-4 py-6">
+          {/* Left Console */}
+          <div className="hidden xl:block w-64 shrink-0">
+            <div className="sticky top-20 space-y-4">
+              <ConsoleLog />
+            </div>
+          </div>
+
+          {/* Center content */}
+          <div className="flex-1 min-w-0">
 
       {/* Actions */}
       <section className="py-6 px-4">
@@ -316,6 +332,17 @@ export default function Database() {
           </div>
         </div>
       </section>
+
+          </div>{/* end center content */}
+
+          {/* Right - Sat-Link Radar */}
+          <div className="hidden xl:block w-64 shrink-0">
+            <div className="sticky top-20 space-y-4">
+              <SatLinkRadar />
+            </div>
+          </div>
+        </div>{/* end flex row */}
+      </div>{/* end container */}
     </Layout>
   );
 }
