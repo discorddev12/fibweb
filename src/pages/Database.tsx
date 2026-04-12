@@ -4,6 +4,8 @@ import Layout from "@/components/Layout";
 import StatusBadge from "@/components/database/StatusBadge";
 import CreateCaseForm from "@/components/database/CreateCaseForm";
 import SearchWarrantForm from "@/components/database/SearchWarrantForm";
+import SatLinkRadar from "@/components/database/SatLinkRadar";
+import ConsoleLog from "@/components/database/ConsoleLog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
