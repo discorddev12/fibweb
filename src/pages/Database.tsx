@@ -332,6 +332,17 @@ export default function Database() {
           </div>
         </div>
       </section>
+
+          </div>{/* end center content */}
+
+          {/* Right - Sat-Link Radar */}
+          <div className="hidden xl:block w-64 shrink-0">
+            <div className="sticky top-20 space-y-4">
+              <SatLinkRadar />
+            </div>
+          </div>
+        </div>{/* end flex row */}
+      </div>{/* end container */}
     </Layout>
   );
 }
