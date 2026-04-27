@@ -17,7 +17,7 @@ const ranks = [
     tier: "Special Coordinators",
     icon: Award,
     members: [
-      { rank: "2S-06 → 2S-11 — Special Coordinator", name: "K.Krispy, J. Davis, O. Dory", role: "The Special Coordinators is a big step, they are tasked with helping with our daily and weekly task from posting Song of the Day to our weekly promotions. They are the Department Heads right hand when getting our tasks completed." },
+      { rank: "2S-06 → 2S-11 — Special Coordinator", name: "J. Davis, O, Dory, Oscatt, T. Williams", role: "The Special Coordinators is a big step, they are tasked with helping with our daily and weekly task from posting Song of the Day to our weekly promotions. They are the Department Heads right hand when getting our tasks completed." },
     ],
   },
   {
@@ -25,22 +25,22 @@ const ranks = [
     icon: Shield,
     members: [
       { rank: "2S — Branch Director", name: "", role: "" },
-      { rank: "2S — Assistant Branch Director", name: "", role: "" },
-      { rank: "2S — Head Special Agent", name: "", role: "" },
-      { rank: "2S — Assistant Special Agent in Charge", name: "", role: "" },
     ],
   },
   {
     tier: "Supervisor Eligible",
     icon: Users,
     members: [
+      { rank: "2S — Assistant Branch Director", name: "", role: "" },
+      { rank: "2S — Head Special Agent", name: "", role: "" },
+      { rank: "2S — Assistant Special Agent in Charge", name: "", role: "" },
       { rank: "3S — Executive Agent", name: "", role: "" },
       { rank: "3S — Supervisory Special Agent", name: "", role: "" },
       { rank: "3S — Senior Special Agent", name: "", role: "" },
     ],
   },
   {
-    tier: "Field Agents",
+    tier: "Non-Supervisors",
     icon: ChevronDown,
     members: [
       { rank: "4S — Special Agent", name: "", role: "" },
