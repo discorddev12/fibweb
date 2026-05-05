@@ -10,14 +10,14 @@ const ranks = [
       { rank: "1S-02 — Deputy Director", name: "S.Seb", role: "Responsibilities as deputy director include assisting the director and leading prominent investigations. All other FIB executives and special agents in charge report to the director through the deputy director." },
       { rank: "1S-03 — Assistant Deputy Director", name: "M.JJ", role: "Is the 3rd in command of the FIB, any reports of any of the agents below will be appointed to him. As the assistant deputy director, he works back-to-back with the deputy director to see who will be the next one up in charge of running a group." },
       { rank: "1S-04 — Deputy Chief of Staff", name: "N/A", role: "Is the 4th in command of the FIB, supports executives in their roles. Takes part on small responsibilities while also strategically and smoothly plan processes across the FIB department to ensure dedicated experience." },
-      { rank: "1S-05 — Associate Deputy Director", name: "N/A", role: "Takes part as 5th in command of the FIB, they have the responsibility for any hands-on management activities. Handle daily basic responsibilities and tasks to keep FIB department running smoothly and consistently. They also typically set and communicate different goals to have the department run smoothly." },
+      { rank: "1S-05 — Associate Deputy Director", name: "O. Dory", role: "Takes part as 5th in command of the FIB, they have the responsibility for any hands-on management activities. Handle daily basic responsibilities and tasks to keep FIB department running smoothly and consistently. They also typically set and communicate different goals to have the department run smoothly." },
     ],
   },
   {
     tier: "Special Coordinators",
     icon: Award,
     members: [
-      { rank: "2S-06 → 2S-11 — Special Coordinator", name: "J. Davis, O, Dory, Oscatt, T. Williams", role: "The Special Coordinators is a big step, they are tasked with helping with our daily and weekly task from posting Song of the Day to our weekly promotions. They are the Department Heads right hand when getting our tasks completed." },
+      { rank: "2S-06 → 2S-11 — Special Coordinator", name: "J. Davis, Oscatt, T. Williams", role: "The Special Coordinators is a big step, they are tasked with helping with our daily and weekly task from posting Song of the Day to our weekly promotions. They are the Department Heads right hand when getting our tasks completed." },
     ],
   },
   {
