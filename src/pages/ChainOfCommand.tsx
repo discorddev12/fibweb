@@ -13,28 +13,28 @@ const executives = [
   },
   {
     title: "Assistant Deputy Director",
-    tag: "@! LOA 1S-03 | O. Dory",
+    tag: "@1S-03 | O. Dory",
     desc: "Is the 3rd in command of the FIB, any reports of any of the agents below will be appointed to him. As the assistant deputy director, he works back-to-back with the deputy director to see who will be the next one up in charge of running a group.",
   },
   {
     title: "Deputy Chief Of Staff",
-    tag: "@1S-03 | M. JJ",
+    tag: "@1S-04 Oscatt",
     desc: "Is the 4th in command of the FIB, supports executives in their roles. Takes part on small responsibilities while also strategically and smoothly plan processes across the FIB department to ensure dedicated experience.",
   },
   {
     title: "Associate Deputy Director",
-    tag: "@# 1S-05 | P. Oscatt",
+    tag: "@# 1S-05 | T. Williams",
     desc: "Takes part as 5th in command of the FIB, they have the responsibility for any activities that Special Coordinator's. handle daily basic responsibilities and tasks to keep the department running smoothly and consistently. They also typically set up different goals to have the department run at a high standard.",
   },
 ];
 
 const coordinators = [
-  { code: "2S-06", tag: "@2S-06 | T. Williams" },
-  { code: "2S-07", tag: "@2S-07 | K-06 | L. Rogers" },
-  { code: "2S-08", tag: "@2S-08 | FCR-03 | T.Scratch" },
-  { code: "2S-09", tag: "@2S-09 | 21-76 M.Spirits" },
-  { code: "2S-10", tag: "@2S-10 EMS-11 J.JAEGER" },
-  { code: "2S-11", tag: "N/A" },
+  { code: "2S-06", tag: "@2S-06 | Scratch" },
+  { code: "2S-07", tag: "@2S-07 | H. Spirits" },
+  { code: "2S-08", tag: "@2S-08 | H. Kit" },
+  { code: "2S-09", tag: "@2S-09 | N/A" },
+  { code: "2S-10", tag: "@2S-10 | N/A" },
+  { code: "2S-11", tag: "2S-11 | P. Exadora" },
 ];
 
 function Entry({ title, tag, desc }: { title: string; tag: string; desc: string }) {
