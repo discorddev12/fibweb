@@ -101,3 +101,9 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* 2nd Dept rank tiers */
+.tier-command { background: oklch(0.62 0.27 330); color: oklch(0.98 0 0); }
+.tier-super { background: oklch(0.52 0.2 25); color: oklch(0.98 0 0); }
+.tier-officer { background: oklch(0.5 0.22 262); color: oklch(0.98 0 0); }
+.tier-locked { background: oklch(0.82 0.13 85); color: oklch(0.15 0.02 260); }
