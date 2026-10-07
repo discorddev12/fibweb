@@ -10,6 +10,7 @@ import Media from "./pages/Media";
 import Join from "./pages/Join";
 import Database from "./pages/Database";
 import SecondDept from "./pages/SecondDept";
+import DeptTransfers from "./pages/DeptTransfers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/join" element={<Join />} />
           <Route path="/database" element={<Database />} />
           <Route path="/2nd-dep" element={<SecondDept />} />
+          <Route path="/dept-transfers" element={<DeptTransfers />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
