@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Join FIB", path: "/join" },
   { label: "Database", path: "/database" },
   { label: "2nd Dep", path: "/2nd-dep" },
+  { label: "Dept Transfers", path: "/dept-transfers" },
 ];
 
 export default function Navbar() {
