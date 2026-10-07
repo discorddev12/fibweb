@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Media", path: "/media" },
   { label: "Join FIB", path: "/join" },
   { label: "Database", path: "/database" },
+  { label: "2nd Dep", path: "/2nd-dep" },
 ];
 
 export default function Navbar() {
