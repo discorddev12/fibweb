@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Shield, Target, Users, Eye } from "lucide-react";
 import Layout from "@/components/Layout";
-import heroBanner from "@/assets/hero-banner.jpg";
+import heroAsset from "@/assets/hero-photo.png.asset.json";
+const heroBanner = heroAsset.url;
 import fibBadge from "@/assets/fib-badge.png";
 
 const values = [

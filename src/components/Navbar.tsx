@@ -9,9 +9,7 @@ const navLinks = [
   { label: "Chain of Command", path: "/chain-of-command" },
   { label: "Media", path: "/media" },
   { label: "Join FIB", path: "/join" },
-  { label: "Database", path: "/database" },
   { label: "2nd Dep", path: "/2nd-dep" },
-  { label: "Dept Transfers", path: "/dept-transfers" },
 ];
 
 export default function Navbar() {
