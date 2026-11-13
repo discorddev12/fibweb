@@ -9,6 +9,7 @@ import ChainOfCommand from "./pages/ChainOfCommand";
 import Media from "./pages/Media";
 import Join from "./pages/Join";
 import SecondDept from "./pages/SecondDept";
+import HighCommandInfo from "./pages/HighCommandInfo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/media" element={<Media />} />
           <Route path="/join" element={<Join />} />
           <Route path="/2nd-dep" element={<SecondDept />} />
+          <Route path="/high-command-info" element={<HighCommandInfo />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

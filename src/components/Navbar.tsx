@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Media", path: "/media" },
   { label: "Join FIB", path: "/join" },
   { label: "2nd Dep", path: "/2nd-dep" },
+  { label: "High Command Info", path: "/high-command-info" },
 ];
 
 export default function Navbar() {
@@ -28,7 +29,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-5">
           {navLinks.map((l) => (
             <Link
               key={l.path}
@@ -43,14 +44,14 @@ export default function Navbar() {
         </div>
 
         {/* Mobile toggle */}
-        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
+        <button aria-label="Toggle navigation" className="lg:hidden text-foreground" onClick={() => setOpen(!open)}>
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-gold bg-background/95 backdrop-blur-md">
+        <div className="lg:hidden border-t border-gold bg-background/95 backdrop-blur-md">
           {navLinks.map((l) => (
             <Link
               key={l.path}
